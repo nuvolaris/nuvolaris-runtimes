@@ -15,9 +15,25 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-version: '3'
+header:
+  license:
+    spdx-id: Apache-2.0
+    copyright-owner: Apache Software Foundation
 
-tasks:
-  setup:
-    cmds:
-      - echo "Nothing to do (yet)."
+  paths-ignore:
+    - 'nodesource_setup.sh'
+    - '**/LICENSE'
+    - '**/package-lock.json'
+    - '**/.*-version'
+    - '**/*.json'
+    - '**/node_modules/**'
+    - '**/build/**'
+    - '**/target/**'
+    - '**/openwhisk/**'
+    - '**/openwhisk-*/**'
+    - '**/parthenon/**'
+ 
+dependency:
+  files:
+    - go.mod
+    - package.json 
