@@ -25,4 +25,4 @@ It includes as a subrepo our fork of some (but not all) `apache/openwhisk-runtim
 
 You can discuss it in the #[nuvolaris-runtimes](https://discord.gg/ZPZZYMG4pS) discord channel and in the forum under the category [runtimes](https://github.com/nuvolaris/nuvolaris/discussions/categories/runtimes).
 
-
+Please read the [development document](https://github.com/nuvolaris/nuvolaris/blob/main/docs/DEVEL.md) for instructions how to setup the development environment and develop this module.
