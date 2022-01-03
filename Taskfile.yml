@@ -21,3 +21,44 @@ tasks:
   setup:
     cmds:
       - echo "Nothing to do (yet)."
+
+  copy:
+   vars:
+     LANG: '{{.LANG}}'
+     VER:  '{{.VER}}'
+     SRC: '{{.SRC}}'
+   cmds:
+    - mkdir -p nuvolaris/{{.LANG}}/{{.VER}}
+    - cp -r apache/openwhisk-runtime-{{.LANG}}/{{.SRC}}/* nuvolaris/{{.LANG}}/{{.VER}}/
+    - cp -r apache/openwhisk-runtime-{{.LANG}}/{{.SRC}}/bin nuvolaris/{{.LANG}}/{{.VER}}/
+    - cp -r apache/openwhisk-runtime-{{.LANG}}/{{.SRC}}/lib nuvolaris/{{.LANG}}/{{.VER}}/
+   status: 
+    - test -d nuvolaris/{{.LANG}}/{{.VER}}
+   ignore_error: true
+
+  java:
+    - task: copy
+      vars: {"LANG":"java", "VER": "8", "SRC":"core/java8actionloop"  }
+
+  go:
+    - task: copy
+      vars: {"LANG":"go", "VER": "1.15", "SRC":"golang1.15" }
+    - task: copy
+      vars: {"LANG":"go", "VER": "1.16", "SRC":"golang1.16" }
+
+  python:
+    - task: copy
+      vars: {"LANG":"python", "VER": "3.7", "SRC":"core/python3Action" }
+    - task: copy
+      vars: {"LANG":"python", "VER": "3.9", "SRC":"core/python39Action" }
+
+  nodejs:
+    - task: copy
+      vars: {"LANG":"nodejs", "VER": "12.1.0", "SRC":"core/typescript37Action" }
+
+  all:
+   deps:
+    - java
+    - go
+    - python
+    - nodejs
