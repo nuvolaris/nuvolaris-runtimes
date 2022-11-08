@@ -1,0 +1,40 @@
+version: '3'
+
+
+vars:
+  BASETAG: 0.3.0-morpheus
+  IMG: ghcr.io/nuvolaris/action
+  TAG: 
+    sh: git describe --tags --abbrev=0 2>/dev/null
+
+tasks:
+
+  docker-login: 
+    cmds:
+      - docker login ghcr.io -u msciabarra --password "{{.TOKEN}}"
+    vars:
+      TOKEN:
+        sh: cat _token
+
+  docker-setup:
+    - docker buildx create --use
+    - docker run -it --rm --privileged tonistiigi/binfmt --install all
+
+  image-tag: 
+    - git tag -d $(git tag) 
+    - git tag -f {{.BASETAG}}.$(date +%y%m%d%H) 
+    - env PAGER= git tag
+
+  nodejs:
+    cmds:
+      - ./gradlew distDocker
+      - | 
+        docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v14:{{.TAG}} core/nodejs14Action/ --push
+        docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs16Action/ --push
+    dir: openwhisk-runtime-nodejs
+
+  java:
+    cmds:
+      - |
+        docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-java-v8:{{.TAG}} core/java8actionloop --push
+    dir: openwhisk-runtime-java
