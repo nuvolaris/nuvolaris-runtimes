@@ -1,26 +1,24 @@
 version: '3'
 
+dotenv: ["../../nuvolaris-operator/.env"]
 
 vars:
   BASETAG: 0.3.0-morpheus
   IMG: ghcr.io/nuvolaris/action
   TAG: 
-    sh: git describe --tags --abbrev=0 2>/dev/null
+    sh: git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD
 
 tasks:
 
   docker-login: 
     cmds:
-      - docker login ghcr.io -u msciabarra --password "{{.TOKEN}}"
-    vars:
-      TOKEN:
-        sh: cat _token
+      - echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USER --password-stdin
 
   docker-setup:
     - docker buildx create --use
     - docker run -it --rm --privileged tonistiigi/binfmt --install all
 
-  image-tag: 
+  image-tag:
     - git tag -d $(git tag) 
     - git tag -f {{.BASETAG}}.$(date +%y%m%d%H) 
     - env PAGER= git tag
@@ -39,3 +37,14 @@ tasks:
       - |
         docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-java-v8:{{.TAG}} core/java8actionloop --push
     dir: openwhisk-runtime-java
+
+  python:
+    dir: openwhisk-runtime-python/core/python310Action
+    cmds:
+    - cp -Rvf ../python3Action/bin .
+    - cp -Rvf ../python3Action/lib .
+    - cp ../requirements_common.txt .
+    - docker build . -t {{.IMG}}-python-v310:{{.TAG}}
+    - task: docker-login
+    - docker push {{.IMG}}-python-v310:{{.TAG}}
+
