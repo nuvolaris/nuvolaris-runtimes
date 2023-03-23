@@ -48,3 +48,13 @@ tasks:
     - task: docker-login
     - docker push {{.IMG}}-python-v310:{{.TAG}}
 
+  python-ai:
+    dir: openwhisk-runtime-python/core/python310Action
+    cmds:
+    - cp -Rvf ../python3Action/bin .
+    - cp -Rvf ../python3Action/lib .
+    - cp ../requirements_common.txt .
+    - cat ../../../python_ai.txt >>../requirements_common.txt
+    - docker build . -t {{.IMG}}-python-v310-ai:{{.TAG}}
+    - task: docker-login
+    - docker push {{.IMG}}-python-v310-ai:{{.TAG}}
