@@ -17,3 +17,5 @@
 #
 .*-version
 _*
+.vscode/
+.git-hooks/
