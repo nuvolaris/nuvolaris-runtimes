@@ -27,9 +27,9 @@ tasks:
     cmds:
       - task: docker-login
       - ./gradlew distDocker
-      - | 
-        docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v14:{{.TAG}} core/nodejs14Action/ --push
-        docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs16Action/ --push
+      - docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v14:{{.TAG}} core/nodejs14Action/ --push
+      - docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs16Action/ --push
+      - docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs18Action/ --push
     dir: openwhisk-runtime-nodejs
 
   java:
