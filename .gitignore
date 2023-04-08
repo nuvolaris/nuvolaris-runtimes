@@ -19,3 +19,5 @@
 _*
 .vscode/
 .git-hooks/
+node_modules/
+*.zip

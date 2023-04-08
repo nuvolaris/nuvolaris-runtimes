@@ -40,14 +40,34 @@ tasks:
     - git tag -f {{.BASETAG}}.$(date +%y%m%d%H) 
     - env PAGER= git tag
 
+  nodejs-one:
+    dir: openwhisk-runtime-nodejs
+    cmds:
+    - ./gradlew :core:nodejs{{.N}}Action:prepare
+    - > 
+      docker buildx build --platform linux/amd64,linux/arm64 
+      -t {{.IMG}}-nodejs-v{{.N}}:{{.TAG}} core/nodejs{{.N}}Action/ --push
+    - ./gradlew :core:nodejs{{.N}}Action:cleanup
+ 
   nodejs:
     cmds:
+      - task: docker-setup
       - task: docker-login
-      - ./gradlew distDocker
-      - docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v14:{{.TAG}} core/nodejs14Action/ --push
-      - docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs16Action/ --push
-      - docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v18:{{.TAG}} core/nodejs18Action/ --push
-    dir: openwhisk-runtime-nodejs
+      - task: nodejs-one
+        vars: 
+          N: 14
+      - task: nodejs-one
+        vars: 
+          N: 16
+      - task: nodejs-one
+        vars: 
+          N: 18
+    
+    
+      #- docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v14:{{.TAG}} core/nodejs14Action/ --push
+      #- docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs16Action/ --push
+      #- docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v18:{{.TAG}} core/nodejs18Action/ --push
+    
 
   java:
     cmds:
