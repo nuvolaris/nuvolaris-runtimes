@@ -22,6 +22,15 @@ tasks:
     cmds:
       - echo "Nothing to do (yet)."
 
+  origin:
+    - git fetch --all
+    - git checkout origin/main -B main
+    - cd apache/openwhisk-runtime-nodejs ; task origin
+    - cd apache/openwhisk-runtime-python ; task origin
+    - cd apache/openwhisk-runtime-go ; task origin
+    - cd apache/openwhisk-runtime-java ; task origin
+    - cd apache/openwhisk-runtime-php ; task origin
+
   copy:
    vars:
      LANG: '{{.LANG}}'
