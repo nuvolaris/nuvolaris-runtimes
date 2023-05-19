@@ -20,7 +20,7 @@ version: '3'
 dotenv: ["../../nuvolaris-operator/.env"]
 
 vars:
-  BASETAG: 0.3.0-morpheus
+  BASETAG: 0.3.0-dev
   IMG: ghcr.io/nuvolaris/action
   TAG: 
     sh: git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD
@@ -37,7 +37,7 @@ tasks:
 
   image-tag:
     - git tag -d $(git tag) 
-    - git tag -f {{.BASETAG}}.$(date +%y%m%d%H) 
+    - git tag -f {{.BASETAG}}.$(date +%y%m%d%H%M) 
     - env PAGER= git tag
 
   nodejs-one:
@@ -55,18 +55,10 @@ tasks:
       - task: docker-login
       - task: nodejs-one
         vars: 
-          N: 14
-      - task: nodejs-one
-        vars: 
           N: 16
       - task: nodejs-one
         vars: 
           N: 18
-    
-    
-      #- docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v14:{{.TAG}} core/nodejs14Action/ --push
-      #- docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v16:{{.TAG}} core/nodejs16Action/ --push
-      #- docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-nodejs-v18:{{.TAG}} core/nodejs18Action/ --push
     
 
   java:
