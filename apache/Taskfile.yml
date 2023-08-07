@@ -40,6 +40,10 @@ tasks:
     - git tag -f {{.BASETAG}}.$(date +%y%m%d%H%M) 
     - env PAGER= git tag
 
+  ferretdb-openshift: >
+      docker buildx build --platform linux/amd64,linux/arm64 
+      -t ghcr.io/nuvolaris/ferretdb:1.6.0 ferretdb-openshift --push
+
   nodejs-one:
     dir: openwhisk-runtime-nodejs
     cmds:
