@@ -32,6 +32,7 @@ header:
     - '**/openwhisk/**'
     - '**/openwhisk-*/**'
     - '**/parthenon/**'
+    - '**/state.tar'
  
 dependency:
   files:
