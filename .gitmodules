@@ -17,16 +17,16 @@
 #
 [submodule "apache/openwhisk-runtime-go"]
 	path = apache/openwhisk-runtime-go
-	url = https://github.com/nuvolaris/openwhisk-runtime-go
+	url = git@github.com:nuvolaris/openwhisk-runtime-go
 [submodule "apache/openwhisk-runtime-python"]
 	path = apache/openwhisk-runtime-python
-	url = https://github.com/nuvolaris/openwhisk-runtime-python
+	url = git@github.com:nuvolaris/openwhisk-runtime-python
 [submodule "apache/openwhisk-runtime-nodejs"]
 	path = apache/openwhisk-runtime-nodejs
-	url = https://github.com/nuvolaris/openwhisk-runtime-nodejs
+	url = git@github.com:nuvolaris/openwhisk-runtime-nodejs
 [submodule "apache/openwhisk-runtime-java"]
 	path = apache/openwhisk-runtime-java
-	url = https://github.com/nuvolaris/openwhisk-runtime-java
+	url = git@github.com:nuvolaris/openwhisk-runtime-java
 [submodule "apache/openwhisk-runtime-php"]
 	path = apache/openwhisk-runtime-php
-	url = https://github.com/nuvolaris/openwhisk-runtime-php
+	url = git@github.com:nuvolaris/openwhisk-runtime-php
