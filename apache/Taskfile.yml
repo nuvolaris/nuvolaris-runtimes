@@ -20,7 +20,7 @@ version: '3'
 dotenv: ["../../nuvolaris-operator/.env"]
 
 vars:
-  BASETAG: 0.3.0-dev
+  BASETAG: 3.0.0-beta
   IMG: ghcr.io/nuvolaris/action
   TAG: 
     sh: git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD
@@ -44,7 +44,7 @@ tasks:
       docker buildx build --platform linux/amd64,linux/arm64 
       -t ghcr.io/nuvolaris/ferretdb:1.6.0 ferretdb-openshift --push
 
-  nodejs-one:
+  _nodejs:
     dir: openwhisk-runtime-nodejs
     cmds:
     - ./gradlew :core:nodejs{{.N}}Action:prepare
@@ -57,13 +57,12 @@ tasks:
     cmds:
       - task: docker-setup
       - task: docker-login
-      - task: nodejs-one
+      - task: _nodejs
         vars: 
           N: 16
-      - task: nodejs-one
+      - task: _nodejs
         vars: 
           N: 18
-    
 
   java:
     cmds:
@@ -71,15 +70,42 @@ tasks:
         docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-java-v8:{{.TAG}} core/java8actionloop --push
     dir: openwhisk-runtime-java
 
-  python:
-    dir: openwhisk-runtime-python/core/python310Action
+
+  _python:
+    dir: openwhisk-runtime-python/core
     cmds:
-    - cp -Rvf ../python3Action/bin .
-    - cp -Rvf ../python3Action/lib .
-    - cp ../requirements_common.txt .
-    - docker build . -t {{.IMG}}-python-v310:{{.TAG}}
-    - task: docker-login
-    - docker push {{.IMG}}-python-v310:{{.TAG}}
+    - cp -Rvf python3Action/bin python{{.N}}Action
+    - cp -Rvf python3Action/lib python{{.N}}Action
+    - cp requirements_common.txt python{{.N}}Action
+    - docker build python{{.N}}Action -t {{.IMG}}-python-v{{.N}}:{{.TAG}} --push
+
+  # N=number of config: N=1
+  # E=extension of test: E=py
+  # R=runtime R=python-v311
+  test:
+    - test -n "{{.N}}"
+    - test -n "{{.E}}"
+    - test -n "{{.R}}"
+    - nuv config use "{{.N}}"
+    - nuv setup nuvolaris login
+    - nuv -wsk action update test test/hello.{{.E}} --docker {{.IMG}}-{{.R}}:{{.TAG}}
+    - nuv -wsk action invoke test -r
+
+
+
+
+  python:
+      - task: docker-setup
+      - task: docker-login
+      - task: _python
+        vars: 
+          N: 311
+      #- task: pythonjs-one
+      #  vars: 
+      #    N: 311
+      #- task: pythonjs-one
+      #  vars: 
+      #    N: 311-ai
 
   python-ai:
     dir: openwhisk-runtime-python/core/python310Action
