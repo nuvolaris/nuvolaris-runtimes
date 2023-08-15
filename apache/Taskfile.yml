@@ -70,7 +70,6 @@ tasks:
         docker buildx build --platform linux/amd64,linux/arm64 -t {{.IMG}}-java-v8:{{.TAG}} core/java8actionloop --push
     dir: openwhisk-runtime-java
 
-
   _python:
     dir: openwhisk-runtime-python/core
     cmds:
@@ -82,7 +81,7 @@ tasks:
   # N=number of config: N=1
   # E=extension of test: E=py
   # R=runtime R=python-v311
-  test:
+  _test:
     - test -n "{{.N}}"
     - test -n "{{.E}}"
     - test -n "{{.R}}"
@@ -91,29 +90,17 @@ tasks:
     - nuv -wsk action update test test/hello.{{.E}} --docker {{.IMG}}-{{.R}}:{{.TAG}}
     - nuv -wsk action invoke test -r
 
-
-
+  test:
+    - task _test N=1 R=python-v311 E=py
 
   python:
       - task: docker-setup
       - task: docker-login
       - task: _python
         vars: 
+          N: 310
+      - task: _python
+        vars: 
           N: 311
-      #- task: pythonjs-one
-      #  vars: 
-      #    N: 311
-      #- task: pythonjs-one
-      #  vars: 
-      #    N: 311-ai
 
-  python-ai:
-    dir: openwhisk-runtime-python/core/python310Action
-    cmds:
-    - cp -Rvf ../python3Action/bin .
-    - cp -Rvf ../python3Action/lib .
-    - cp ../requirements_common.txt .
-    - cat ../../../python_ai.txt >>../requirements_common.txt
-    - docker build . -t {{.IMG}}-python-v310-ai:{{.TAG}}
-    - task: docker-login
-    - docker push {{.IMG}}-python-v310-ai:{{.TAG}}
+  
