@@ -88,10 +88,11 @@ tasks:
     - nuv config use "{{.N}}"
     - nuv setup nuvolaris login
     - nuv -wsk action update test test/hello.{{.E}} --docker {{.IMG}}-{{.R}}:{{.TAG}}
-    - nuv -wsk action invoke test -r
+    - nuv -wsk action invoke test -r | grep Hello
 
   test:
-    - task _test N=1 R=python-v311 E=py
+    - #task _test N=1 R=python-v311 E=py
+    - task _test N=2 R=python-v311 E=py
 
   python:
       - task: docker-setup

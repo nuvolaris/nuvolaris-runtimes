@@ -21,3 +21,4 @@ _*
 .git-hooks/
 node_modules/
 *.zip
+olaris
