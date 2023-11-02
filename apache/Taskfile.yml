@@ -76,7 +76,10 @@ tasks:
     - cp -Rvf python3Action/bin python{{.N}}Action
     - cp -Rvf python3Action/lib python{{.N}}Action
     - cp requirements_common.txt python{{.N}}Action
-    - docker build python{{.N}}Action -t {{.IMG}}-python-v{{.N}}:{{.TAG}} --push
+    - >
+       docker buildx build  python{{.N}}Action 
+       --platform linux/amd64,linux/arm64
+       -t {{.IMG}}-python-v{{.N}}:{{.TAG}} --push
 
   # N=number of config: N=1
   # E=extension of test: E=py
