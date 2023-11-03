@@ -81,6 +81,24 @@ tasks:
        --platform linux/amd64,linux/arm64
        -t {{.IMG}}-python-v{{.N}}:{{.TAG}} --push
 
+  _php:
+    dir: openwhisk-runtime-php
+    cmds:
+    - > 
+       docker buildx build --platform linux/amd64,linux/arm64 
+       -t {{.IMG}}-php-v{{.N}}:{{.TAG}} core/php{{.N}}Action/ --push
+ 
+  php:
+    cmds:
+      - task: docker-setup
+      - task: docker-login
+      - task: _php
+        vars: { N: "8.0" }
+      - task: _php
+        vars: { N: "8.1" }
+      - task: _php
+        vars: { N: "8.2" }
+
   # N=number of config: N=1
   # E=extension of test: E=py
   # R=runtime R=python-v311
