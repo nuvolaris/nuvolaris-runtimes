@@ -30,3 +30,6 @@
 [submodule "apache/openwhisk-runtime-php"]
 	path = apache/openwhisk-runtime-php
 	url = git@github.com:nuvolaris/openwhisk-runtime-php
+[submodule "apache/openwhisk-runtime-dotnet"]
+	path = apache/openwhisk-runtime-dotnet
+	url = git@github.com:nuvolaris/openwhisk-runtime-dotnet
