@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9LY6SHI8hWp+pebNouRF3NC/hgZS7DI/Js/dkQtC/kyycASskZgavXLyNDBvWwr3otXE3wiXVqBPZs2O/X2daA==",
+  "success": true,
+  "projectFilePath": "E:\\SOURCECODE\\NUVOLARIS\\runtime\\openwhisk-runtime-dotnet\\core\\net7.0\\proxy\\Apache.OpenWhisk.Runtime.Common\\Apache.OpenWhisk.Runtime.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cor27\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
