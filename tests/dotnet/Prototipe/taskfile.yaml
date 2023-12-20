@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Concatena i file .cs e .csproj in un unico file
+    cmds:
+      - |
+        if [ -f unique.ai ]; then
+          rm unique.ai
+        fi
+        touch unique.ai
+        for file in $(shopt -s globstar; echo **/*.cs **/*.csproj); do
+          if [ -f "$file" ]; then
+            echo "----- START OF $file -----" >> unique.ai
+            cat "$file" >> unique.ai
+            echo "----- END OF $file -----" >> unique.ai
+          fi
+        done
+    silent: true
