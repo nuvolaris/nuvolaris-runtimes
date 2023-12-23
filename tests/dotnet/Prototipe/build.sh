@@ -19,6 +19,7 @@ mkdir -p out
 cp bin/Release/net7.0/*.* out/
 #cp bin/Release/net7.0/$project_name.exe out/
 cp OWUtils/template.yaml out/
+cp OWUtils/invoke.ps1 out/
 
 # Creazione dell'archivio zip
 cd out
@@ -32,12 +33,13 @@ chmod +x ./$project_name.exe
 ./$project_name.exe generate
 
 # Pulizia dei file non necessari
-find . -type f ! -name '*.zip' ! -name '*.yml' ! -name '*.sh' -delete
+find . -type f ! -name '*.zip' ! -name '*.yml' ! -name '*.ps1' -delete
 
 # Deploy e invocazione dell'azione
 nuv -wsk project undeploy
 nuv -wsk project deploy
-./invoke.sh
+
+powershell.exe -File invoke.ps1
 
 # Pausa di 5 secondi per visualizzare l'output
 sleep 5

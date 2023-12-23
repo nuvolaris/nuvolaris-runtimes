@@ -32,6 +32,12 @@ namespace OW
         // The API key to authenticate against the OpenWhisk API.
         public string ApiKey { get; set; }
 
+        // The server path where host api is located.
+        public string Server { get; set; }
+
+        // The authorization path where host api is located.
+        public string AuthUri { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the OpenWhiskFunctionDescriptor class with specified details.
         /// </summary>
@@ -44,6 +50,8 @@ namespace OW
         /// <param name="sslVerify">Flag for SSL verification requirement.</param>
         /// <param name="timeout">Timeout duration for the action.</param>
         /// <param name="apiKey">API key for authentication.</param>
+        /// <param name="server">Server path for host api.</param>
+        /// <param name="authUri">Authorization path for host api.</param>
         public OpenWhiskFunctionDescriptor(
             string[] httpMethods,
             string route,
@@ -53,7 +61,9 @@ namespace OW
             bool result,
             bool sslVerify,
             int timeout,
-            string apiKey)
+            string apiKey,
+            string server,
+            string authUri)
         {
             HttpMethods = httpMethods ?? throw new ArgumentNullException(nameof(httpMethods));
             Route = route ?? throw new ArgumentNullException(nameof(route));
@@ -64,6 +74,8 @@ namespace OW
             SslVerify = sslVerify;
             Timeout = timeout;
             ApiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            Server = server ?? throw new ArgumentNullException(nameof(server));
+            AuthUri = authUri ?? throw new ArgumentNullException(nameof(authUri));
         }
     }
 }

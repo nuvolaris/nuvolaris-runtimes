@@ -71,9 +71,11 @@ Per utilizzare e configurare correttamente il progetto, segui questi passaggi:
 - **Imposta Custom Attributes**: Modifica i Custom Attributes sopra il metodo `Execute` per definire azione, package di OpenWhisk e route di APISIX. Ad esempio:
 
   ```csharp
-  [Action("NomeAzione")]
-  [Package("NomePackage")]
-  [Route("/percorso/api")]
+  [AuthUri("/AUTH/authorize")]
+  [Server("https://nuvolaris.dynamicsconsulting.it/gateway")]
+  [Package("PrototipeMicroservices")]
+  [Action("PrototipeFNC")]
+  [Route("/prototipe/api/v1/")]
   public class MyMicroservicesOpenWhiskExecutor
   {
       // ...
@@ -113,6 +115,10 @@ Per utilizzare e configurare correttamente il progetto, segui questi passaggi:
 ### 4. Test della Funzione
 
 - **Utilizzo del Plugin di VSCode per OpenWhisk**: Dopo il deploy, puoi testare la funzione direttamente da VSCode utilizzando il plugin di OpenWhisk. Questo ti permette di inviare richieste e visualizzare le risposte direttamente dall'IDE.
+
+### 5. Specifiche OpenApi
+
+- **Ottenere specifiche OpenApi**: Il sistema nella cartella out genera automaticamente un file openapi.json con specifiche openapi 3.0.0. Questa funzione imposta il file per caricarlo in swagger, ma non è ancora in grado di mappare i metodi custom della post. 
 
 ## Contribuire
 

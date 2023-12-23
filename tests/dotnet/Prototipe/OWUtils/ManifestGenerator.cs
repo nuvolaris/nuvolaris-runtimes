@@ -7,14 +7,17 @@ namespace OW
 {
     public class ManifestGenerator
     {
-        private readonly string _templatePath;
-        private readonly string _outputPath;
+        private readonly string _YAMLtemplatePath;
+        private readonly string _YAMLoutputPath;
+
+        private readonly string _PS1InvoketemplatePath;
 
         // Constructor to initialize the paths needed for the generator.
-        public ManifestGenerator(string templatePath, string outputPath)
+        public ManifestGenerator(string YAMLtemplatePath, string YAMLoutputPath, string PS1InvoketemplatePath)
         {
-            _templatePath = templatePath;
-            _outputPath = outputPath;
+            _YAMLtemplatePath = YAMLtemplatePath;
+            _YAMLoutputPath = YAMLoutputPath;
+            _PS1InvoketemplatePath = PS1InvoketemplatePath;
         }
 
         // Main method that generates the manifest based on the assembly information and template file.
@@ -35,7 +38,7 @@ namespace OW
             string dllName = entryAssembly?.GetName()?.Name ?? string.Empty;
             var publicClassType = entryAssembly?.GetTypes().FirstOrDefault(t => t.GetMethods().Any(method => method.Name == "Execute"));
 
-            string template = File.ReadAllText(_templatePath);
+            string template = File.ReadAllText(_YAMLtemplatePath);
 
             // Replace placeholders in the template if present.
             if (publicClassType != null)
@@ -43,11 +46,14 @@ namespace OW
                 ProcessTemplatePlaceholders(ref template, publicClassType, runtimeVersion, dllName, actionName, packageName);
             }
             // Write the modified content back to the output file.
-            File.WriteAllText(_outputPath, template);
+            File.WriteAllText(_YAMLoutputPath, template);
 
-            // Generate the invoke.sh script with the appropriate package and action names.
-            string invokeContent = $"nuv action invoke {packageName}/{actionName} --param setupapisix true -r ";
-            File.WriteAllText("invoke.sh", invokeContent);
+            string invokeTemplate = File.ReadAllText(_PS1InvoketemplatePath);
+
+            ProcessTemplatePlaceholders(ref invokeTemplate, packageName, actionName);
+            // Generate the invoke.ps1 script with the appropriate package and action names.
+
+            File.WriteAllText("invoke.ps1", invokeTemplate);
         }
 
         // Processes the template placeholders and replaces them with actual values.
@@ -77,6 +83,22 @@ namespace OW
                                .Replace("##projectname##", packageName)
                                .Replace("##Programcsnamespace##", publicClassType?.Namespace ?? string.Empty)
                                .Replace("##publicclassname##", publicClassType?.Name ?? string.Empty);
+        }
+
+        private void ProcessTemplatePlaceholders(ref string template, string packageName, string actionName)
+        {
+            // Only retrieve process data if placeholders exist in the template.
+
+            if (template.Contains("##packagename##"))
+            {
+                template = template.Replace("##packagename##", packageName.Trim());
+            }
+
+            if (template.Contains("##actionname##"))
+            {
+                template = template.Replace("##actionname##", actionName.Trim());
+            }
+
         }
 
         // Replaces database related placeholders in the template string.

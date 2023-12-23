@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace OWMicroservices
 {
     // Class to perform OpenWhisk operations
+    [AuthUri("/AUTH/authorize")]
+    [Server("https://nuvolaris.dynamicsconsulting.it/gateway")]
     [Package("PrototipeMicroservices")]
     [Action("PrototipeFNC")]
     [Route("/prototipe/api/v1/")]
@@ -24,9 +26,26 @@ namespace OWMicroservices
                 FncDto? fncDto = null;
                 // Configure APISIX if required
                 var setupResult = PluginConfig.SetupApisixIfRequired(args!).GetAwaiter().GetResult();
-                if (setupResult["error"] != null)
+                if (setupResult is not null && setupResult["error"] is null)
                 {
+                    if (setupResult["result"] is null)
+                    {
+                        return AddResultInBody(setupResult);
+                    }
+
+                }else
+                {
+                    if (setupResult is not null && setupResult["error"] is not null)
                     return AddResultInBody(setupResult);
+                    else
+                    {
+                        return AddResultInBody(new JObject
+                        {
+                            ["error"] = "Setup APISIX non riuscito",
+                            ["message"] = "Setup APISIX non riuscito",
+                            ["args"] = args
+                        });
+                    }
                 }
 
                 if (args != null)
@@ -62,7 +81,7 @@ namespace OWMicroservices
                 // Handles exceptions during execution and provides detailed error message
                 return AddResultInBody(new JObject
                 {
-                    ["error"] = $"Error during action execution: {ex.Message}, line: {(ex.StackTrace != null ? ExtractLineNumber(ex.StackTrace) : "N/A")}"
+                    ["error"] = $"Error during action execution: {ex.Message}, line: {(ex.StackTrace != null ? ExtractLineNumber(ex.StackTrace) : "N/A")}, args: {args}"
                 });
             }
         }

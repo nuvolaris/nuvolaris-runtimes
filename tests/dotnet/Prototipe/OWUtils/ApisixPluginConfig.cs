@@ -26,24 +26,28 @@ namespace OW
             string actionName = OpenWhiskUtilities.GetAttributeValue("Action");
             string packageName = OpenWhiskUtilities.GetAttributeValue("Package");
             string routeName = OpenWhiskUtilities.GetAttributeValue("Route");
+            string authUri = OpenWhiskUtilities.GetAttributeValue("AuthUri");
+            string server = OpenWhiskUtilities.GetAttributeValue("Server");
 
             try
             {
                 // Check if 'setupapisix' argument is provided and equals "True"
-                if (args["setupapisix"]?.ToString() == "True")
+                if (args["setupapisix"]?.ToString().ToUpper() == "TRUE")
                 {
                     // Prepare descriptor based on extracted attributes and additional settings
                     var descriptor = new OpenWhiskFunctionDescriptor
                     (
                         httpMethods: new[] { "GET", "PUT", "DELETE", "PATCH", "POST" },
                         route: routeName,
-                        name: $"{actionName}_{packageName}",
+                        name: $"{packageName}-{actionName}",
                         package: packageName,
                         action: actionName,
                         result: true,
                         sslVerify: false,
                         timeout: 60000,
-                        apiKey: args["API_KEY"]?.ToString() ?? "ERROR_API_KEY_NOT_FOUND"
+                        apiKey: args["API_KEY"]?.ToString() ?? "ERROR_API_KEY_NOT_FOUND",
+                        server: server,
+                        authUri: authUri
                     );
 
                     // Execute the setup routine with the prepared descriptor

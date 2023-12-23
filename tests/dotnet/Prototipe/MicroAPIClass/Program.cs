@@ -12,7 +12,7 @@ public static class Program
         if (args.Length > 0)
         {
             // Create a generator instance to produce manifest files.
-            var generator = new ManifestGenerator("template.yaml", "manifest.yml");
+            var generator = new ManifestGenerator("template.yaml", "manifest.yml", "invoke.ps1");
 
             // Process command based on the first argument, doing case-insensitive comparison.
             switch (args[0].ToLowerInvariant())

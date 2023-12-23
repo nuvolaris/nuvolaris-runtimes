@@ -1,0 +1,301 @@
+{
+    "components":  {
+                       "schemas":  {
+                                       "FncDto":  {
+                                                      "schema":  {
+                                                                     "properties":  {
+                                                                                        "Descr":  {
+                                                                                                      "type":  "string"
+                                                                                                  },
+                                                                                        "Enabled":  {
+                                                                                                        "type":  "nullable`1"
+                                                                                                    },
+                                                                                        "Id":  {
+                                                                                                   "type":  "guid"
+                                                                                               },
+                                                                                        "UpdDate":  {
+                                                                                                        "type":  "nullable`1"
+                                                                                                    }
+                                                                                    },
+                                                                     "type":  "object"
+                                                                 }
+                                                  }
+                                   }
+                   },
+    "info":  {
+                 "title":  "PrototipeMicroservices-PrototipeFNC",
+                 "version":  "1.0.0"
+             },
+    "openapi":  "3.0.0",
+    "paths":  {
+                  "/prototipe/api/v1/PrototipeMicroservices-PrototipeFNC":  {
+                                                                                "delete":  {
+                                                                                               "description":  "API for DELETE",
+                                                                                               "operationId":  "PrototipeMicroservices-PrototipeFNC_delete",
+                                                                                               "parameters":  [
+                                                                                                                  {
+                                                                                                                      "description":  "Table ID",
+                                                                                                                      "in":  "query",
+                                                                                                                      "name":  "Id",
+                                                                                                                      "schema":  {
+                                                                                                                                     "type":  "guid"
+                                                                                                                                 }
+                                                                                                                  }
+                                                                                                              ],
+                                                                                               "responses":  {
+                                                                                                                 "200":  {
+                                                                                                                             "content":  {
+                                                                                                                                             "application/json":  {
+                                                                                                                                                                      "example":  {
+                                                                                                                                                                                      "Descr":  null,
+                                                                                                                                                                                      "Enabled":  true,
+                                                                                                                                                                                      "Id":  "5ea1e350-4f8c-414e-b5af-d87dcda85cc3",
+                                                                                                                                                                                      "UpdDate":  "2023-12-23T01:55:56.953182+00:00"
+                                                                                                                                                                                  },
+                                                                                                                                                                      "schema":  {
+                                                                                                                                                                                     "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                                 }
+                                                                                                                                                                  }
+                                                                                                                                         },
+                                                                                                                             "description":  "Successful response"
+                                                                                                                         }
+                                                                                                             },
+                                                                                               "security":  [
+                                                                                                                {
+                                                                                                                    "bearerAuth":  [
+
+                                                                                                                                   ]
+                                                                                                                }
+                                                                                                            ],
+                                                                                               "summary":  "API for DELETE",
+                                                                                               "tags":  [
+                                                                                                            "PrototipeMicroservices-PrototipeFNC"
+                                                                                                        ],
+                                                                                               "x-examples":  {
+                                                                                                                  "curl":  "curl -X DELETE \"https://nuvolaris.dynamicsconsulting.it/gateway/prototipe/api/v1/PrototipeMicroservices-PrototipeFNC\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\""
+                                                                                                              }
+                                                                                           },
+                                                                                "get":  {
+                                                                                            "description":  "API for GET",
+                                                                                            "operationId":  "PrototipeMicroservices-PrototipeFNC_get",
+                                                                                            "parameters":  [
+                                                                                                               {
+                                                                                                                   "description":  "Table ID",
+                                                                                                                   "in":  "query",
+                                                                                                                   "name":  "Id",
+                                                                                                                   "schema":  {
+                                                                                                                                  "type":  "guid"
+                                                                                                                              }
+                                                                                                               }
+                                                                                                           ],
+                                                                                            "responses":  {
+                                                                                                              "200":  {
+                                                                                                                          "content":  {
+                                                                                                                                          "application/json":  {
+                                                                                                                                                                   "example":  {
+                                                                                                                                                                                   "Descr":  null,
+                                                                                                                                                                                   "Enabled":  true,
+                                                                                                                                                                                   "Id":  "4b012f3b-e439-4321-84c5-3fe5972a0282",
+                                                                                                                                                                                   "UpdDate":  "2023-12-23T01:55:56.945632+00:00"
+                                                                                                                                                                               },
+                                                                                                                                                                   "schema":  {
+                                                                                                                                                                                  "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                              }
+                                                                                                                                                               }
+                                                                                                                                      },
+                                                                                                                          "description":  "Successful response"
+                                                                                                                      }
+                                                                                                          },
+                                                                                            "security":  [
+                                                                                                             {
+                                                                                                                 "bearerAuth":  [
+
+                                                                                                                                ]
+                                                                                                             }
+                                                                                                         ],
+                                                                                            "summary":  "API for GET",
+                                                                                            "tags":  [
+                                                                                                         "PrototipeMicroservices-PrototipeFNC"
+                                                                                                     ],
+                                                                                            "x-examples":  {
+                                                                                                               "curl":  "curl -X GET \"https://nuvolaris.dynamicsconsulting.it/gateway/prototipe/api/v1/PrototipeMicroservices-PrototipeFNC\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\""
+                                                                                                           }
+                                                                                        },
+                                                                                "patch":  {
+                                                                                              "description":  "API for PATCH",
+                                                                                              "operationId":  "PrototipeMicroservices-PrototipeFNC_patch",
+                                                                                              "parameters":  [
+
+                                                                                                             ],
+                                                                                              "requestBody":  {
+                                                                                                                  "content":  {
+                                                                                                                                  "application/json":  {
+                                                                                                                                                           "example":  {
+                                                                                                                                                                           "Descr":  null,
+                                                                                                                                                                           "Enabled":  true,
+                                                                                                                                                                           "Id":  "bd3a9c48-f150-42ee-b3ca-3d3c9d6c0b17",
+                                                                                                                                                                           "UpdDate":  "2023-12-23T01:55:56.9532651+00:00"
+                                                                                                                                                                       },
+                                                                                                                                                           "schema":  {
+                                                                                                                                                                          "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                      }
+                                                                                                                                                       }
+                                                                                                                              }
+                                                                                                              },
+                                                                                              "responses":  {
+                                                                                                                "200":  {
+                                                                                                                            "content":  {
+                                                                                                                                            "application/json":  {
+                                                                                                                                                                     "example":  {
+                                                                                                                                                                                     "Descr":  null,
+                                                                                                                                                                                     "Enabled":  true,
+                                                                                                                                                                                     "Id":  "f3ef3745-43e8-429b-abae-c711c9642edc",
+                                                                                                                                                                                     "UpdDate":  "2023-12-23T01:55:56.9532896+00:00"
+                                                                                                                                                                                 },
+                                                                                                                                                                     "schema":  {
+                                                                                                                                                                                    "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                                }
+                                                                                                                                                                 }
+                                                                                                                                        },
+                                                                                                                            "description":  "Successful response"
+                                                                                                                        }
+                                                                                                            },
+                                                                                              "security":  [
+                                                                                                               {
+                                                                                                                   "bearerAuth":  [
+
+                                                                                                                                  ]
+                                                                                                               }
+                                                                                                           ],
+                                                                                              "summary":  "API for PATCH",
+                                                                                              "tags":  [
+                                                                                                           "PrototipeMicroservices-PrototipeFNC"
+                                                                                                       ],
+                                                                                              "x-examples":  {
+                                                                                                                 "curl":  "curl -X PATCH \"https://nuvolaris.dynamicsconsulting.it/gateway/prototipe/api/v1/PrototipeMicroservices-PrototipeFNC\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\" -d \u0027{\"Id\":\"e3c442b6-adc4-41ca-99fa-56ff96b4a276\",\"Descr\":null,\"Enabled\":true,\"UpdDate\":\"2023-12-23T01:55:56.9533068+00:00\"}\u0027 -H \"Authorization: Bearer YOUR_JWT_TOKEN\""
+                                                                                                             }
+                                                                                          },
+                                                                                "post":  {
+                                                                                             "description":  "API for POST",
+                                                                                             "operationId":  "PrototipeMicroservices-PrototipeFNC_post",
+                                                                                             "parameters":  [
+
+                                                                                                            ],
+                                                                                             "requestBody":  {
+                                                                                                                 "content":  {
+                                                                                                                                 "application/json":  {
+                                                                                                                                                          "example":  {
+                                                                                                                                                                          "Descr":  null,
+                                                                                                                                                                          "Enabled":  true,
+                                                                                                                                                                          "Id":  "d1a688c2-72e3-40a1-a30f-79e71de288b8",
+                                                                                                                                                                          "UpdDate":  "2023-12-23T01:55:56.9533338+00:00"
+                                                                                                                                                                      },
+                                                                                                                                                          "schema":  {
+                                                                                                                                                                         "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                     }
+                                                                                                                                                      }
+                                                                                                                             }
+                                                                                                             },
+                                                                                             "responses":  {
+                                                                                                               "200":  {
+                                                                                                                           "content":  {
+                                                                                                                                           "application/json":  {
+                                                                                                                                                                    "example":  {
+                                                                                                                                                                                    "Descr":  null,
+                                                                                                                                                                                    "Enabled":  true,
+                                                                                                                                                                                    "Id":  "da79b1f0-fb88-440a-8591-aeda94aff3a8",
+                                                                                                                                                                                    "UpdDate":  "2023-12-23T01:55:56.9533534+00:00"
+                                                                                                                                                                                },
+                                                                                                                                                                    "schema":  {
+                                                                                                                                                                                   "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                               }
+                                                                                                                                                                }
+                                                                                                                                       },
+                                                                                                                           "description":  "Successful response"
+                                                                                                                       }
+                                                                                                           },
+                                                                                             "security":  [
+                                                                                                              {
+                                                                                                                  "bearerAuth":  [
+
+                                                                                                                                 ]
+                                                                                                              }
+                                                                                                          ],
+                                                                                             "summary":  "API for POST",
+                                                                                             "tags":  [
+                                                                                                          "PrototipeMicroservices-PrototipeFNC"
+                                                                                                      ],
+                                                                                             "x-examples":  {
+                                                                                                                "curl":  "curl -X POST \"https://nuvolaris.dynamicsconsulting.it/gateway/prototipe/api/v1/PrototipeMicroservices-PrototipeFNC\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\" -d \u0027{\"key1\":\"value1\", \"key2\":\"value2\"}\u0027 -H \"Authorization: Bearer YOUR_JWT_TOKEN\""
+                                                                                                            }
+                                                                                         },
+                                                                                "put":  {
+                                                                                            "description":  "API for PUT",
+                                                                                            "operationId":  "PrototipeMicroservices-PrototipeFNC_put",
+                                                                                            "parameters":  [
+
+                                                                                                           ],
+                                                                                            "requestBody":  {
+                                                                                                                "content":  {
+                                                                                                                                "application/json":  {
+                                                                                                                                                         "example":  {
+                                                                                                                                                                         "Descr":  null,
+                                                                                                                                                                         "Enabled":  true,
+                                                                                                                                                                         "Id":  "b31516f9-a195-40eb-8e81-1372af89c057",
+                                                                                                                                                                         "UpdDate":  "2023-12-23T01:55:56.9508019+00:00"
+                                                                                                                                                                     },
+                                                                                                                                                         "schema":  {
+                                                                                                                                                                        "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                    }
+                                                                                                                                                     }
+                                                                                                                            }
+                                                                                                            },
+                                                                                            "responses":  {
+                                                                                                              "200":  {
+                                                                                                                          "content":  {
+                                                                                                                                          "application/json":  {
+                                                                                                                                                                   "example":  {
+                                                                                                                                                                                   "Descr":  null,
+                                                                                                                                                                                   "Enabled":  true,
+                                                                                                                                                                                   "Id":  "b9f18456-d19a-4cdb-9a4e-c4444a97f1c2",
+                                                                                                                                                                                   "UpdDate":  "2023-12-23T01:55:56.9508448+00:00"
+                                                                                                                                                                               },
+                                                                                                                                                                   "schema":  {
+                                                                                                                                                                                  "$ref":  "#/components/schemas/FncDto"
+                                                                                                                                                                              }
+                                                                                                                                                               }
+                                                                                                                                      },
+                                                                                                                          "description":  "Successful response"
+                                                                                                                      }
+                                                                                                          },
+                                                                                            "security":  [
+                                                                                                             {
+                                                                                                                 "bearerAuth":  [
+
+                                                                                                                                ]
+                                                                                                             }
+                                                                                                         ],
+                                                                                            "summary":  "API for PUT",
+                                                                                            "tags":  [
+                                                                                                         "PrototipeMicroservices-PrototipeFNC"
+                                                                                                     ],
+                                                                                            "x-examples":  {
+                                                                                                               "curl":  "curl -X PUT \"https://nuvolaris.dynamicsconsulting.it/gateway/prototipe/api/v1/PrototipeMicroservices-PrototipeFNC\" -H \"Content-Type: application/json\" -H \"Authorization: Bearer YOUR_JWT_TOKEN\" -d \u0027{\"Id\":\"96a424ca-a776-4b26-bd39-1c9837e6dda7\",\"Descr\":null,\"Enabled\":true,\"UpdDate\":\"2023-12-23T01:55:56.9508632+00:00\"}\u0027 -H \"Authorization: Bearer YOUR_JWT_TOKEN\""
+                                                                                                           }
+                                                                                        }
+                                                                            }
+              },
+    "securitySchemes":  {
+                            "bearerAuth":  {
+                                               "bearerFormat":  "JWT",
+                                               "description":  "JWT token can be obtained from https://nuvolaris.dynamicsconsulting.it/gateway/AUTH/authorize",
+                                               "scheme":  "bearer",
+                                               "type":  "http"
+                                           }
+                        },
+    "servers":  [
+                    {
+                        "url":  "https://nuvolaris.dynamicsconsulting.it/gateway"
+                    }
+                ]
+}
