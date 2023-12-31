@@ -32,27 +32,35 @@ namespace OW
             try
             {
                 // Check if 'setupapisix' argument is provided and equals "True"
+
+                // Prepare descriptor based on extracted attributes and additional settings
+                var descriptor = new OpenWhiskFunctionDescriptor
+                (
+                    httpMethods: new[] { "GET", "PUT", "DELETE", "PATCH", "POST" },
+                    route: routeName,
+                    name: actionName,
+                    package: packageName,
+                    action: actionName,
+                    result: true,
+                    sslVerify: false,
+                    timeout: 60000,
+                    apiKey: args["API_KEY"]?.ToString() ?? "ERROR_API_KEY_NOT_FOUND",
+                    server: server,
+                    authUri: authUri
+                );
+
+                // Execute the setup routine with the prepared descriptor
+                if (args["generateopenapi"]?.ToString().ToUpper() == "TRUE")
+                {
+                    return OpenWhiskUtilities.GenerateOpenApiSpec(descriptor);
+                }
+                else
                 if (args["setupapisix"]?.ToString().ToUpper() == "TRUE")
                 {
-                    // Prepare descriptor based on extracted attributes and additional settings
-                    var descriptor = new OpenWhiskFunctionDescriptor
-                    (
-                        httpMethods: new[] { "GET", "PUT", "DELETE", "PATCH", "POST" },
-                        route: routeName,
-                        name: $"{packageName}-{actionName}",
-                        package: packageName,
-                        action: actionName,
-                        result: true,
-                        sslVerify: false,
-                        timeout: 60000,
-                        apiKey: args["API_KEY"]?.ToString() ?? "ERROR_API_KEY_NOT_FOUND",
-                        server: server,
-                        authUri: authUri
-                    );
-
-                    // Execute the setup routine with the prepared descriptor
                     return await OpenWhiskUtilities.SetupRouteInApisix(descriptor);
                 }
+
+
 
                 // If setup is not required, return a simple JObject indicating it.
                 return JObject.FromObject(new { result = "Setup non richiesto" });

@@ -240,7 +240,7 @@ namespace OW
                     }
                 },
                 methods = descriptor.HttpMethods,
-                name = descriptor.Name,
+                name = descriptor.Package + "-" + descriptor.Name,
                 uri = $"{descriptor.Route}{descriptor.Action}"
             };
 
@@ -259,7 +259,7 @@ namespace OW
                     return new JObject { ["error"] = await response.Content.ReadAsStringAsync(), ["sended_body"] = JObject.FromObject(routeConfig) };
                 }
                 var respcont = JObject.Parse(await response.Content.ReadAsStringAsync());
-                var openapiSpec = GenerateOpenApiSpec(respcont, descriptor);
+                var openapiSpec = GenerateOpenApiSpec(descriptor);
                 // Return success object including the route configuration sent.
                 return new JObject
                 {
@@ -281,7 +281,7 @@ namespace OW
         /// <param name="setupResult">Result from setting up the Apisix route as JObject.</param>
         /// <param name="descriptor">Details of the OpenWhisk function.</param>
         /// <returns>OpenAPI Specification as JObject.</returns>
-        public static JObject GenerateOpenApiSpec(JObject setupResult, OpenWhiskFunctionDescriptor descriptor)
+        public static JObject GenerateOpenApiSpec(OpenWhiskFunctionDescriptor descriptor)
         {
             string OpenApiPath = GeneratePathForMethod(descriptor);
             // Create the base structure for OpenAPI spec.
@@ -339,7 +339,8 @@ namespace OW
                             ["properties"] = fncDtoSchema
                         }
                     }
-                }
+                },
+                ["security"] = new JArray(new JObject { ["bearerAuth"] = new JArray() }) // Aggiungi informazioni di sicurezza JWT
             };
 
             return openApiSpec;
@@ -385,6 +386,7 @@ namespace OW
                             },
                             ["example"] = JObject.FromObject(new FncDto())
                         }
+
                     }
                 };
             }
@@ -438,8 +440,8 @@ namespace OW
             var pathItem = new JObject
             {
 
-                    ["tags"] = new JArray(descriptor.Name),
-                    ["operationId"] = $"{descriptor.Name}_{httpMethod.ToLower()}",
+                    ["tags"] = new JArray(descriptor.Package + "-" +  descriptor.Name),
+                    ["operationId"] = $"{descriptor.Package}-{descriptor.Name}_{httpMethod.ToLower()}",
                     ["summary"] = $"API for {httpMethod.ToUpper()}",
                     ["description"] = $"API for {httpMethod.ToUpper()}",
                     ["parameters"] = new JArray(),
@@ -460,8 +462,7 @@ namespace OW
                             }
                         }
                     },
-                    ["x-examples"] = new JObject(),
-                    ["security"] = new JArray(new JObject { ["bearerAuth"] = new JArray() }) // Aggiungi informazioni di sicurezza JWT
+                    ["x-examples"] = new JObject()
 
             };
 
