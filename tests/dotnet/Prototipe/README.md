@@ -55,18 +55,7 @@ Per il corretto funzionamento del progetto, è necessario configurare:
 
 Per utilizzare e configurare correttamente il progetto, segui questi passaggi:
 
-### 1. Configurazione dei File e Attributi
-
-- **Configura `appsettings.json`**: Modifica questo file per impostare i parametri di configurazione, come le credenziali del database e altre impostazioni dell'applicazione.
-
-  ```json
-  {
-    "DB_SERVER": "localhost",
-    "DB_NAME": "miodatabase",
-    "DB_USER": "utente",
-    "DB_PASSWORD": "password"
-  }
-  ```
+### 1. Configurazione Attributi
 
 - **Imposta Custom Attributes**: Modifica i Custom Attributes sopra il metodo `Execute` per definire azione, package di OpenWhisk e route di APISIX. Ad esempio:
 
@@ -94,7 +83,7 @@ Per utilizzare e configurare correttamente il progetto, segui questi passaggi:
       // Altri campi...
   }
   ```
-
+  ***ATTENZIONE***: Non modificare la sezione del costruttire di variabili per i dati di accesso al server, questi vengono presi autonomamente dalla chiamata OpenWhisk come configurati nel deploy lanciato dal build.sh
 - **Personalizza gli Handle dei Verbi HTTP**: Modifica gli handle per adattarli alle tue esigenze specifiche. Ad esempio, per cambiare la logica dell'operazione GET:
 
   ```csharp

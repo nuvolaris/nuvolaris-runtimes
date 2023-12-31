@@ -29,26 +29,22 @@ namespace OW
         public string? tableName { get; set; }
         private readonly string _connectionString;
 
-        private IConfiguration config;
+
 
         // Costruttore del repository
         public FncDtoRepository(string argsJson)
         {
-            config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
+            // DO NOT MODIFY THIS CONSTRUCTOR
             dynamic? args = argsJson != null ? JsonConvert.DeserializeObject(argsJson) : null;
-            string server = config["DB_SERVER"] ?? "nuvolaris-postgres";
-            string database = config["DB_NAME"] ?? "nuvolaris";
-            string port = config["DB_PORT"] ?? "5432";
-            string user = config["DB_USER"] ?? args?.DB_USER ?? string.Empty;
-            string password = config["DB_PASSWORD"] ?? args?.DB_PASSWORD ?? string.Empty;
-            actionName = config["ACTION_NAME"] ?? args?.ACTION_NAME ?? string.Empty;
+            string server = args?.DB_SERVER ?? string.Empty;
+            string database = args?.DB_NAME ?? string.Empty;
+            string port = args?.DB_PORT ?? string.Empty;
+            string user = args?.DB_USER ?? string.Empty;
+            string password = args?.DB_PASSWORD ?? string.Empty;
+            actionName = args?.ACTION_NAME ?? string.Empty;
             tableName = actionName + "_Dto";
-
             _connectionString = $"SERVER={server};PORT={port};DATABASE={database};UID={user};PWD={password};";
+            // END DO NOT MODIFY
         }
 
         // Opens a new connection and ensures it's ready for use.
