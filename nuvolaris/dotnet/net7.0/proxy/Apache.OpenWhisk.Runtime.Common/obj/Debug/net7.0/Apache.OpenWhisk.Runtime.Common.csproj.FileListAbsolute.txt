@@ -1,0 +1,12 @@
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\bin\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.deps.json
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\bin\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.dll
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\bin\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.pdb
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.csproj.AssemblyReference.cache
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.AssemblyInfoInputs.cache
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.AssemblyInfo.cs
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.csproj.CoreCompileInputs.cache
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.dll
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\refint\Apache.OpenWhisk.Runtime.Common.dll
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\Apache.OpenWhisk.Runtime.Common.pdb
+E:\SOURCECODE\NUVOLARIS\runtime\openwhisk-runtime-dotnet\core\net7.0\proxy\Apache.OpenWhisk.Runtime.Common\obj\Debug\net7.0\ref\Apache.OpenWhisk.Runtime.Common.dll
