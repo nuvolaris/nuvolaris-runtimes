@@ -2,6 +2,7 @@
 local function transform_body(_ctx, xbody)
     local method = _ctx.var.method or 'unknown'
     local modified_body = nil
+	local core = require("apisix.core")
 
     -- Funzione per analizzare la stringa di query in una tabella
     local function parse_query(query)
@@ -16,8 +17,23 @@ local function transform_body(_ctx, xbody)
     local url_params_str = _ctx.var.args or ''
     local url_params = parse_query(url_params_str)
 
-    -- Recupera e analizza gli header HTTP
-    local headers = ngx.req.get_headers() or {}
+    -- Funzione per unire due tabelle
+    local function merge_tables(t1, t2)
+        for k, v in pairs(t2) do
+            if t1[k] == nil then
+                t1[k] = v
+            end
+        end
+        return t1
+    end
+
+    local headers_ctx = _ctx.var.http_headers or {}
+    local headers_ngx = ngx.req.get_headers()
+    local headers_core = core.request.headers(_ctx) or {}  -- Assumendo che questa sia la funzione corretta
+
+    -- Unisci gli header
+    local headers = merge_tables(headers_ctx, headers_ngx)
+    headers = merge_tables(headers, headers_core)
 	
     local headers_json = ''
     for k, v in pairs(headers) do
